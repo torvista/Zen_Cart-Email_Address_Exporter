@@ -1,1 +1,1 @@
-# Zen_Cart-Email_Address_Exporter
+# Zen Cart - Email Address Exporter
