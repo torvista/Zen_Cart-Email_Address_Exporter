@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * @copyright Copyright 2003-2023 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
@@ -13,19 +15,19 @@ if (!defined('DIR_FS_EMAIL_EXPORT')) define('DIR_FS_EMAIL_EXPORT',DIR_FS_CATALOG
 
   $query_name = '';
 
-  $action = (isset($_GET['action']) ? $_GET['action'] : '');
+  $action = ($_GET['action'] ?? '');
 //if ($action == 'save') die(print_r($_POST, true));
   $NL="
 "; // NOTE: The line break above is INTENTIONAL!
 
-  $available_export_formats[0]=array('id' => '0', 'text' => 'CSV');
-  $available_export_formats[1]=array('id' => '1', 'text' => 'TXT');
-  $available_export_formats[2]=array('id' => '2', 'text' => 'HTML');
-  $available_export_formats[3]=array('id' => '3', 'text' => 'XML');
+  $available_export_formats[0]= ['id' => '0', 'text' => 'CSV'];
+  $available_export_formats[1]= ['id' => '1', 'text' => 'TXT'];
+  $available_export_formats[2]= ['id' => '2', 'text' => 'HTML'];
+  $available_export_formats[3]= ['id' => '3', 'text' => 'XML'];
   $save_to_file_checked=(isset($_POST['savetofile']) && zen_not_null($_POST['savetofile']) ? $_POST['savetofile'] : 0 );
   $post_format = (isset($_POST['format']) && zen_not_null($_POST['format']) ? $_POST['format'] : 1 );
   $format = $available_export_formats[$post_format]['text'];
-  $file = (isset($_POST['filename']) ? $_POST['filename'] : 'email_addresses.txt');
+  $file = ($_POST['filename'] ?? 'email_addresses.txt');
   if (!preg_match('/.*\.(csv|txt|html?|xml)$/', $file)) $file .= '.txt';
 
   if ($action != '') {
