@@ -1,2 +1,5 @@
 # Zen Cart - Email Address Exporter
-From https://www.zen-cart.com/downloads.php?do=file&id=6
+
+## Changelog
+### 17/11/2023: torvista
+Initial commit of Version: 157 30/11/2022 from Plugins https://www.zen-cart.com/downloads.php?do=file&id=6
