@@ -242,8 +242,9 @@ if (!defined('DIR_FS_EMAIL_EXPORT')) define('DIR_FS_EMAIL_EXPORT',DIR_FS_CATALOG
       <tr>
         <td><?php echo zen_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
-      <tr><?php echo zen_draw_form('export', FILENAME_EMAIL_EXPORT, 'action=save','post');//, 'onsubmit="return check_form(export);"'); ?>
+      <tr>
         <td align="center">
+            <?php echo zen_draw_form('export', FILENAME_EMAIL_EXPORT, 'action=save','post');//, 'onsubmit="return check_form(export);"'); ?>
           <table border="0" cellspacing="0" cellpadding="2">
           <tr>
             <td class="main"><?php echo TEXT_EMAIL_EXPORT_FORMAT; ?><br />
@@ -278,7 +279,7 @@ if (!defined('DIR_FS_EMAIL_EXPORT')) define('DIR_FS_EMAIL_EXPORT',DIR_FS_CATALOG
             <td class="main" colspan="2"><?php echo TEXT_INSTRUCTIONS; ?></td>
           </tr>
       </table></td>
-    </form>
+    <?php echo '</form>'; ?>
 <!-- body_text_eof //-->
   </tr>
 </table>
