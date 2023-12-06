@@ -1,17 +1,26 @@
 <?php
+
+declare(strict_types=1);
 /**
- * Register module into admin menu system
+ * Plugin Email Address Exporter
+ * @copyright Copyright 2003-2023 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license https://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @link https://www.zen-cart.com/downloads.php?do=file&id=6
+ * @link https://github.com/torvista/Zen_Cart-Email_Address_Exporter
+ * @version $Id: 2023 Dec 06 torvista $
  */
+
+//Register module into admin menu system
 if (!defined('IS_ADMIN_FLAG')) {
     die('Illegal Access');
 }
 
 if (function_exists('zen_register_admin_page')) {
-  if (!zen_page_key_exists('emailExport')) {
-    zen_register_admin_page('emailExport', 'BOX_TOOLS_EMAIL_EXPORT','FILENAME_EMAIL_EXPORT', '', 'tools', 'Y', 10);
-  }
+    if (!zen_page_key_exists('emailExport')) {
+        zen_register_admin_page('emailExport', 'BOX_TOOLS_EMAIL_EXPORT', 'FILENAME_EMAIL_EXPORT', '', 'tools', 'Y');
+    }
 }
-
 
 // other tweaking to add slightly more flexibility when exporting email addresses
 $result = $db->Execute("SELECT query_string from " . TABLE_QUERY_BUILDER . " where query_name = 'All Customers'");
