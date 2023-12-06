@@ -1,8 +1,7 @@
 # Zen Cart - Email Address Exporter
 
 ## Current GitHub Status
-Missing installer for Tools Menu Item.
-Tested with Zen Cart 158 and php 8.3.0.
+Tested with Zen Cart 158 and php 8.3.0....needs more modification to queries in query_builder as company and telephonre are hard-coded in the output, but not always in the query result.
 
 ## Original Readme
 
