@@ -19,7 +19,7 @@ if (!defined('DIR_FS_EMAIL_EXPORT')) define('DIR_FS_EMAIL_EXPORT', DIR_FS_CATALO
 $query_name = '';
 
 $action = ($_GET['action'] ?? '');
-//if ($action == 'save') die(print_r($_POST, true));
+
 $NL="
 "; // NOTE: The line break above is INTENTIONAL!
 
@@ -38,21 +38,21 @@ if ($action != '') {
         case 'save':
             global $db;
 
-            if ($format == 'CSV') {
+            if ($format === 'CSV') {
                 $FIELDSTART = '"';
                 $FIELDEND = '"';
                 $FIELDSEPARATOR = ',';
                 $LINESTART = '';
                 $LINEBREAK = "\n";
             }
-            if ($format == 'TXT') {
+            if ($format === 'TXT') {
                 $FIELDSTART = '';
                 $FIELDEND = '';
                 $FIELDSEPARATOR = "\t";
                 $LINESTART = '';
                 $LINEBREAK = "\n";
             }
-            if ($format == 'HTML') {
+            if ($format === 'HTML') {
                 $FIELDSTART = '<td>';
                 $FIELDEND = '</td>';
                 $FIELDSEPARATOR = '';
@@ -64,7 +64,7 @@ if ($action != '') {
                 $query_name = $_POST['audience_selected'];
                 if (is_array($_POST['audience_selected'])) $query_name = $_POST['audience_selected']['text'];
             }
-            if ($query_name == '') {
+            if ($query_name === '') {
                 $messageStack->add('Please select an option', 'error');
                 break;
             }
@@ -83,13 +83,13 @@ if ($action != '') {
             $query_string = $audience_select['query_string'];
             $audience = $db->Execute($query_string);
             $records = $audience->RecordCount();
-            if ($records == 0) {
+            if ($records === 0) {
                 $messageStack->add_session('No Records Found.', 'error');
             } else { //process records
                 $i = 0;
 
                 // make a <table> tag if HTML output
-                if ($format == 'HTML') {
+                if ($format === 'HTML') {
                     $exporter_output = '<table border="1">' . $NL;
                 } else {
                     $exporter_output = '';
@@ -104,7 +104,7 @@ if ($action != '') {
                  */
 
                 // add column headers if CSV or HTML format
-                if ($format == 'CSV' || $format == 'HTML') {
+                if ($format === 'CSV' || $format === 'HTML') {
                     $exporter_output .= $LINESTART;
                     $exporter_output .= $FIELDSTART . 'customers_email_address' . $FIELDEND;
                     $exporter_output .= $FIELDSEPARATOR;
@@ -118,7 +118,7 @@ if ($action != '') {
                     $exporter_output .= $LINEBREAK;
                 }
                 // headers - XML
-                if ($format == 'XML') {
+                if ($format === 'XML') {
                     $exporter_output .= '<?xml version="1.0" encoding="' . CHARSET . '"?>' . "\n";
                 }
 
@@ -132,14 +132,16 @@ if ($action != '') {
                      *    The field's data is represented as: $audience->fields['FIELD_NAME_HERE'], as seen in the existing fields below.
                      *    Be sure to add it for both the XML format and the non-XML format, for consistency.  Again, follow the pattern.
                      */
-                    if ($format == "XML") {
+                    $audience->fields['entry_company'] = !empty($audience->fields['entry_company']) ? $audience->fields['entry_company'] : '';
+                    $audience->fields['customers_telephone'] = !empty($audience->fields['customers_telephone']) ? $audience->fields['customers_telephone'] : '';
+                    if ($format === 'XML') {
                         $exporter_output .= "<address_book>\n";
                         $exporter_output .= "  <contact>\n";
                         $exporter_output .= "    <firstname>" . $audience->fields['customers_firstname'] . "</firstname>\n";
-                        $exporter_output .= "    <lastname>" .$audience->fields['customers_lastname'] . "</lastname>\n";
+                        $exporter_output .= "    <lastname>" . $audience->fields['customers_lastname'] . "</lastname>\n";
                         $exporter_output .= "    <email_address>" . $audience->fields['customers_email_address'] . "</email_address>\n";
-                        $exporter_output .= "    <company>" .$audience->fields['entry_company'] . "</company>\n";
-                        $exporter_output .= "    <telephone>" .$audience->fields['customers_telephone'] . "</telephone>\n";
+                        $exporter_output .= "    <company>" . $audience->fields['entry_company'] . "</company>\n";
+                        $exporter_output .= "    <telephone>" . $audience->fields['customers_telephone'] . "</telephone>\n";
                         $exporter_output .= "  </contact>\n";
                     } else {  // output non-XML data-format
                         $exporter_output .= $LINESTART;
@@ -158,24 +160,24 @@ if ($action != '') {
                     $audience->MoveNext();
                 }
 
-                if ($format == 'HTML') {
+                if ($format === 'HTML') {
                     $exporter_output .= $NL . '</table>';
                 }
-                if ($format == 'XML') {
+                if ($format === 'XML') {
                     $exporter_output .= "</address_book>\n";
                 }
 
-                // theoretically, $i should == $records at this point.
+                // theoretically, $i should === $records at this point.
 
                 // status message
                 $messageStack->add($records . ' Processed.', 'success');
 
                 // begin streaming file contents
                 if ($save_to_file_checked != 1) { // not saving to a file, so do regular output
-                    if ($format == 'CSV' || $format == 'TXT' || $format == 'XML') {
-                        if ($format == 'CSV' || $format == 'TXT') {
+                    if ($format === 'CSV' || $format === 'TXT' || $format === 'XML') {
+                        if ($format === 'CSV' || $format === 'TXT') {
                             $content_type = 'text/x-csv';
-                        } elseif ($format == 'XML') {
+                        } else { //XML
                             $content_type = 'text/xml; charset=' . CHARSET;
                         }
                         if (preg_match('/MSIE/', $_SERVER['HTTP_USER_AGENT'])) {
@@ -281,7 +283,7 @@ require DIR_WS_INCLUDES . 'header.php'; ?>
                                 <td class="main"><?php
                                     echo TEXT_EMAIL_EXPORT_FILENAME; ?><br>
                                     <?php
-                                    echo zen_draw_input_field('filename', htmlspecialchars($file, ENT_COMPAT, CHARSET, true), ' size="60"'); ?></td>
+                                    echo zen_draw_input_field('filename', htmlspecialchars($file, ENT_COMPAT, CHARSET), ' size="60"'); ?></td>
                             </tr>
                             <tr>
                                 <td><?php
