@@ -23,7 +23,7 @@ define('TEXT_INSTRUCTIONS','<h3>Instructions</h3>
 <ol>
 <li>Choose your export format.</li>
 <li>Choose a recipient list.</li>
-<li>Enter a filename. Use a file extension that corrsponds to the filetype chosed (must end in one of: .csv .txt .htm .xml).</li>
+<li>Enter a filename. Use a file extension that corresponds to the chosen filetype (must end as .csv / .txt / .htm / .xml).</li>
 <li>Click Save to proceed.</li>
 <li>Check the box to save to the /logs folder, or just click Save to download to another location.</li>
 </ol>');

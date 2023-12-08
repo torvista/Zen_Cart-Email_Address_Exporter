@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @version $Id: 2023 Dec 06 torvista $
  */
 
-define('FILENAME_EMAIL_EXPORT', 'email_export');
+define('FILENAME_EMAIL_EXPORT', 'email_address_exporter');
 define('BOX_TOOLS_EMAIL_EXPORT', 'Email Address Exporter');
 
 // change destination here for path when using "save to file on server"
