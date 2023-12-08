@@ -75,7 +75,7 @@ if ($action != '') {
              *    Once the query in query_builder has been updated and tested, the following section of code will automatically
              *    bring in the right data for use in later steps.
              */
-            $audience_select = get_audience_sql_query($query_name, 'newsletters');
+            $audience_select = get_audience_sql_query($query_name, 'email_exporter');
             if (empty($audience_select['query_string'])) {
                 $messageStack->add_session('No such query.', 'error');
                 zen_redirect(zen_href_link(FILENAME_EMAIL_EXPORT));
@@ -273,7 +273,7 @@ require DIR_WS_INCLUDES . 'header.php'; ?>
                                 <td class="main"><?php
                                     echo TEXT_PLEASE_SELECT_AUDIENCE; ?><br>
                                     <?php
-                                    echo zen_draw_pull_down_menu('audience_selected', get_audiences_list('newsletters'), $query_name) ?></td>
+                                    echo zen_draw_pull_down_menu('audience_selected', get_audiences_list('email_exporter'), $query_name) ?></td>
                             </tr>
                             <tr>
                                 <td><?php
