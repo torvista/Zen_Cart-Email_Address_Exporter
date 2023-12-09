@@ -8,15 +8,15 @@ declare(strict_types=1);
  * @license https://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @link https://www.zen-cart.com/downloads.php?do=file&id=6
  * @link https://github.com/torvista/Zen_Cart-Email_Address_Exporter
- * @version $Id: 2023 Dec 06 torvista $
+ * @version $Id: 2023 Dec 12 torvista $
  */
 
-define('FILENAME_EMAIL_EXPORT', 'email_address_exporter');
-define('BOX_TOOLS_EMAIL_EXPORT', 'Email Address Exporter');
+define('FILENAME_EMAIL_EXPORTER', 'email_exporter');
+define('BOX_TOOLS_EMAIL_EXPORTER', 'Email Address Exporter');
 
 // change destination here for path when using "save to file on server"
 if (defined('DIR_FS_LOGS')) {
-    define('DIR_FS_EMAIL_EXPORT',DIR_FS_LOGS . '/');
+    define('DIR_FS_EMAIL_EXPORTER',DIR_FS_LOGS . '/');
 } else {
-    define('DIR_FS_EMAIL_EXPORT',DIR_FS_CATALOG . 'images/uploads/');
+    define('DIR_FS_EMAIL_EXPORTER',DIR_FS_CATALOG . 'images/uploads/');
 }

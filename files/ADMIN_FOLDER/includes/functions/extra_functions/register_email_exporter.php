@@ -16,8 +16,8 @@ if (!defined('IS_ADMIN_FLAG')) {
     die('Illegal Access');
 }
 
-if (!zen_page_key_exists('emailExport')) {
-    zen_register_admin_page('emailExport', 'BOX_TOOLS_EMAIL_EXPORT', 'FILENAME_EMAIL_EXPORT', '', 'tools', 'Y');
+if (!zen_page_key_exists('emailExporter')) {
+    zen_register_admin_page('emailExporter', 'BOX_TOOLS_EMAIL_EXPORTER', 'FILENAME_EMAIL_EXPORTER', '', 'tools', 'Y');
 }
 
 // other tweaking to add slightly more flexibility when exporting email addresses
